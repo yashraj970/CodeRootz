@@ -1,3 +1,6 @@
+const User = require("../models/User");
+const Role = require("../models/Role");
+
 const getUsers = async (req, res) => {
   try {
     const users = await User.find().populate("role", "name");
@@ -25,3 +28,5 @@ const updateUserRole = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+module.exports = { getUsers, updateUserRole };
