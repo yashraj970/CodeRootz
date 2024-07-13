@@ -5,6 +5,8 @@ import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Login from "../../pages/Login/Login";
 import Signup from "../../pages/Signup/Signup";
+import RoleManagement from "../../pages/RoleManagement/RoleManagement";
+import UserManagement from "../../pages/UserManagement/UserManagement";
 
 const AllRoutes = () => {
   return (
@@ -14,6 +16,22 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Home />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/rolemanagement"
+        element={
+          <PrivateRoute>
+            <RoleManagement />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/usermanagement"
+        element={
+          <PrivateRoute>
+            <UserManagement />
           </PrivateRoute>
         }
       />
