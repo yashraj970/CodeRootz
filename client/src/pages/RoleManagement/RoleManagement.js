@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { Roles } from "../../config/constants";
 
 const RoleManagement = () => {
@@ -8,6 +10,17 @@ const RoleManagement = () => {
   const [roleName, setRoleName] = useState("");
   const [roleMenus, setRoleMenus] = useState([]);
   const [selectedRole, setSelectedRole] = useState(null);
+
+  // Define the menu options here (you can replace these with actual menu names)
+  const menuOptions = [
+    "Menu 1",
+    "Menu 2",
+    "Menu 3",
+    "Menu 4",
+    "Menu 5",
+    "User Management",
+    "Role Management",
+  ];
 
   useEffect(() => {
     fetchRoles();
@@ -72,17 +85,18 @@ const RoleManagement = () => {
         onChange={(e) => setRoleName(e.target.value)}
         placeholder="Role Name"
       />
-      <select
+      <Select
         multiple
         value={roleMenus}
-        onChange={(e) =>
-          setRoleMenus(
-            [...e.target.selectedOptions].map((option) => option.value)
-          )
-        }
+        onChange={(e) => setRoleMenus(e.target.value)}
+        renderValue={(selected) => selected.join(", ")}
       >
-        {/* Render menu options here */}
-      </select>
+        {menuOptions.map((menu) => (
+          <MenuItem key={menu} value={menu}>
+            {menu}
+          </MenuItem>
+        ))}
+      </Select>
       <Button
         variant="contained"
         onClick={selectedRole ? handleUpdateRole : handleCreateRole}
