@@ -14,7 +14,7 @@ connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/roles", RoleRoutes);
-app.use("/api/roles", UserRoutes);
+app.use("/api/users", UserRoutes);
 
 app.listen(4000, () => {
   console.log("server is running on 4000");
