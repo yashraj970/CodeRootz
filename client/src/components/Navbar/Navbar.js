@@ -129,5 +129,5 @@ const navLinks = [
 
   { title: "Dummy Menu 3", path: "/billing" },
   { title: "Dummy Menu 4", path: "/campaigns" },
-  { title: "Dummy Menu 5", path: "/campaigns" },
+  { title: "Dummy Menu 5", path: "/Dummy" },
 ];
