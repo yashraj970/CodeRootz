@@ -1,11 +1,8 @@
-const baseUrl = "http://localhost:4000/api/";
+const baseUrl = "http://localhost:4000/api";
 
-const Login_Api = "http://localhost:4000/api/auth/login";
-const SignUp_Api = "http://localhost:4000/api/auth/signup";
+const Login_Api = `${baseUrl}/auth/login`;
+const SignUp_Api = `${baseUrl}/auth/signup`;
 
+const Roles = `${baseUrl}/roles`;
 
-
-export {
-  Login_Api,
-  SignUp_Api,
-};
+export { baseUrl, Login_Api, SignUp_Api, Roles };
