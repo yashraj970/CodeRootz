@@ -17,24 +17,6 @@ import { notifyError, notifySuccess } from "../../utilities/toast";
 import { CircularProgress } from "@mui/material";
 import { Login_Api } from "../../config/constants";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        GHL-AI
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const Login = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -75,7 +57,7 @@ const Login = () => {
             notifySuccess("Login successful");
             localStorage.setItem("token", response?.data?.token);
             setLoading(false);
-            navigate("/assistants");
+            navigate("/");
           } else {
             notifyError("Invalid credentials");
             setLoading(false);
@@ -173,14 +155,13 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item xs={12}>
-                <Link href="/signup" variant="body2" color={"#fff"}>
+                <Link href="/signup" variant="body2" color={"#000"}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} color={"#fff"} />
       </Container>
     </div>
   );

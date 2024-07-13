@@ -15,24 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { SignUp_Api } from "../../config/constants";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="">
-        Won-Call AI
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const Signup = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -190,14 +172,13 @@ const Signup = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
-                <Link href="/login" variant="body2" color={"#fff"}>
+                <Link href="/login" variant="body2" color={"#000"}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5, color: "#fff", mb: 8 }} />
       </Container>
     </div>
   );
