@@ -4,9 +4,9 @@ const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const connectDB = require("../config/db");
 
-// Seed Database Function
 const seedDatabase = async () => {
   try {
+    // Clear existing roles and users
     await Role.deleteMany();
     await User.deleteMany();
 
@@ -28,14 +28,14 @@ const seedDatabase = async () => {
       menus: ["Menu 1", "Menu 2", "Menu 3", "Menu 4", "Menu 5"],
     });
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash("superadminpassword", salt);
-
-    await User.create({
+    // Create a Superadmin user
+    const superadminUser = new User({
       username: "superadmin",
-      password: hashedPassword,
+      password: "superadminpassword",
       role: superadminRole._id,
     });
+
+    await superadminUser.save(); // This will trigger the pre('save') hook
 
     console.log("Database seeded successfully!");
     process.exit();

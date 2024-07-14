@@ -65,7 +65,10 @@ const Signup = () => {
           navigate("/login");
         })
         .catch((error) => {
-          notifyError("An error occurred while signing up");
+          console.log(error?.response);
+          notifyError(
+            error?.response?.data?.error || "An error occurred while signing up"
+          );
           setLoading(false);
         });
     }
