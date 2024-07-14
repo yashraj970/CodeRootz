@@ -24,7 +24,7 @@ const Navbar = () => {
     if (storedRole) {
       setRole(JSON.parse(storedRole));
     }
-  }, []);
+  }, [localStorage.getItem("role")]);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -36,9 +36,9 @@ const Navbar = () => {
   };
 
   const handleLogin = () => {
-    console.log(localStorage.getItem("token"));
     if (localStorage.getItem("token")) {
       localStorage.clear();
+      navigate("/login");
     } else {
       navigate("/login");
     }
