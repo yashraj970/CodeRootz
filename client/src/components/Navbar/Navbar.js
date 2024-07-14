@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
-  Divider,
   Drawer,
   List,
   ListItem,
@@ -39,6 +38,7 @@ const Navbar = () => {
     if (localStorage.getItem("token")) {
       localStorage.clear();
       navigate("/login");
+      setRole(null);
     } else {
       navigate("/login");
     }
@@ -72,7 +72,6 @@ const Navbar = () => {
           </Link>
         ))}
       </List>
-      <Divider sx={{ bgcolor: "#FFFFFF" }} />
     </Box>
   );
 
