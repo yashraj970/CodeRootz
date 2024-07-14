@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Roles } from "../../config/constants";
+import styles from "./UserManagement.module.css";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -48,11 +49,11 @@ const UserManagement = () => {
   };
 
   return (
-    <div>
-      <h1>User Management</h1>
-      <ul>
+    <div className={styles.container}>
+      <h1 className={styles.title}>User Management</h1>
+      <ul className={styles.userList}>
         {users.map((user) => (
-          <li key={user._id}>
+          <li key={user._id} className={styles.userItem}>
             {user.username} - {user.role?.name || "No role assigned"}
             <button
               onClick={() => {
@@ -66,7 +67,7 @@ const UserManagement = () => {
         ))}
       </ul>
       {selectedUser && (
-        <div>
+        <div className={styles.roleSection}>
           <h2>Assign Role to {selectedUser.username}</h2>
           <select
             value={selectedRole}
