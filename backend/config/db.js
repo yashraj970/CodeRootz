@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const localDB = `mongodb://0.0.0.0:27017/app_ghl_ai`;
+const localDB = `mongodb://0.0.0.0:27017/codeRootz`;
 const connectDB = async () => {
   try {
     await mongoose.connect(localDB, {});
