@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Divider,
@@ -12,13 +12,26 @@ import {
 import { Link } from "react-router-dom";
 import { rootColors } from "../../utilities/Colors/Colors";
 import MenuIcon from "@mui/icons-material/Menu";
-// import AccountMenu from "../AccountMenu/AccountMenu";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem("role");
+    console.log(storedRole, "storedRole");
+    if (storedRole) {
+      setRole(JSON.parse(storedRole));
+    }
+  }, []);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  };
+
+  const getNavLinks = () => {
+    if (!role) return [];
+    return navLinks.filter((link) => role.menus.includes(link.title));
   };
 
   const DrawerList = (
@@ -32,18 +45,18 @@ const Navbar = () => {
       onClick={toggleDrawer(false)}
     >
       <List>
-        {navLinks.map((text, index) => (
+        {getNavLinks().map((link) => (
           <Link
-            key={text.path}
-            to={text.path}
+            key={link.path}
+            to={link.path}
             style={{
               textDecoration: "none",
               color: "#FFFFFF",
             }}
           >
-            <ListItem key={text?.title} disablePadding>
+            <ListItem key={link.title} disablePadding>
               <ListItemButton>
-                <ListItemText primary={text?.title} />
+                <ListItemText primary={link.title} />
               </ListItemButton>
             </ListItem>
           </Link>
@@ -87,18 +100,6 @@ const Navbar = () => {
         alignItems: "center",
       }}
     >
-      {/* <Stack
-        sx={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          gap: "60px",
-          display: { xs: "none", md: "flex" },
-        }}
-      >
-        <Stack>
-          <AccountMenu />
-        </Stack>
-      </Stack> */}
       <Stack onClick={toggleDrawer(true)} sx={{ cursor: "pointer" }}>
         <MenuIcon />
       </Stack>
@@ -122,12 +123,11 @@ const navLinks = [
     path: "/rolemanagement",
   },
   {
-    title: "Dummy Menu 1",
-    path: "/calllogs",
+    title: "Menu 1",
+    path: "/menu1",
   },
-  { title: "Dummy Menu 2", path: "/contactlist" },
-
-  { title: "Dummy Menu 3", path: "/billing" },
-  { title: "Dummy Menu 4", path: "/campaigns" },
-  { title: "Dummy Menu 5", path: "/Dummy" },
+  { title: "Menu 2", path: "/menu2" },
+  { title: "Menu 3", path: "/menu3" },
+  { title: "Menu 4", path: "/menu4" },
+  { title: "Menu 5", path: "/menu5" },
 ];

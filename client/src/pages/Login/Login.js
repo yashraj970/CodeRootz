@@ -33,9 +33,10 @@ const Login = () => {
     const newErrors = {};
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Invalid email address";
     }
+    // else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+    //   newErrors.email = "Invalid email address";
+    // }
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
@@ -65,7 +66,10 @@ const Login = () => {
           }
         })
         .catch((error) => {
-          notifyError("An error occurred while logging in");
+          console.log(error?.response);
+          notifyError(
+            error?.response?.data?.error || "An error occurred while logging in"
+          );
           setLoading(false);
         });
     }
