@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { Roles } from "../../config/constants";
+import styles from "./RoleManagement.module.css";
 
 const RoleManagement = () => {
   const [roles, setRoles] = useState([]);
@@ -11,7 +12,6 @@ const RoleManagement = () => {
   const [roleMenus, setRoleMenus] = useState([]);
   const [selectedRole, setSelectedRole] = useState(null);
 
-  // Define the menu options here (you can replace these with actual menu names)
   const menuOptions = [
     "Menu 1",
     "Menu 2",
@@ -77,52 +77,62 @@ const RoleManagement = () => {
   };
 
   return (
-    <div>
-      <h1>Role Management</h1>
-      <input
-        type="text"
-        value={roleName}
-        onChange={(e) => setRoleName(e.target.value)}
-        placeholder="Role Name"
-      />
-      <Select
-        multiple
-        value={roleMenus}
-        onChange={(e) => setRoleMenus(e.target.value)}
-        renderValue={(selected) => selected.join(", ")}
-      >
-        {menuOptions.map((menu) => (
-          <MenuItem key={menu} value={menu}>
-            {menu}
-          </MenuItem>
-        ))}
-      </Select>
-      <Button
-        variant="contained"
-        onClick={selectedRole ? handleUpdateRole : handleCreateRole}
-      >
-        {selectedRole ? "Update Role" : "Create Role"}
-      </Button>
-      <ul>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Role Management</h1>
+      <div className={styles.inputContainer}>
+        <input
+          type="text"
+          value={roleName}
+          onChange={(e) => setRoleName(e.target.value)}
+          placeholder="Role Name"
+          className={styles.inputField}
+        />
+        <Select
+          multiple
+          value={roleMenus}
+          onChange={(e) => setRoleMenus(e.target.value)}
+          renderValue={(selected) => selected.join(", ")}
+          className={styles.selectField}
+          size="small"
+        >
+          {menuOptions.map((menu) => (
+            <MenuItem key={menu} value={menu}>
+              {menu}
+            </MenuItem>
+          ))}
+        </Select>
+        <Button
+          variant="contained"
+          onClick={selectedRole ? handleUpdateRole : handleCreateRole}
+          className={styles.button}
+        >
+          {selectedRole ? "Update Role" : "Create Role"}
+        </Button>
+      </div>
+      <ul className={styles.roleList}>
         {roles.map((role) => (
-          <li key={role._id}>
+          <li key={role._id} className={styles.roleItem}>
             {role.name}
-            <Button
-              variant="contained"
-              onClick={() => {
-                setSelectedRole(role);
-                setRoleName(role.name);
-                setRoleMenus(role.menus);
-              }}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => handleDeleteRole(role._id)}
-            >
-              Delete
-            </Button>
+            <div>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setSelectedRole(role);
+                  setRoleName(role.name);
+                  setRoleMenus(role.menus);
+                }}
+                className={styles.button}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => handleDeleteRole(role._id)}
+                className={styles.button}
+              >
+                Delete
+              </Button>
+            </div>
           </li>
         ))}
       </ul>

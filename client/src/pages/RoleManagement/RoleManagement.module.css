@@ -1,0 +1,56 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 15px;
+}
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.inputField {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.selectField {
+  width: 300px;
+}
+
+.button {
+  margin-right: 10px;
+}
+
+.roleList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.roleItem {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roleItem button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.roleItem button:hover {
+  background-color: #0056b3;
+}
