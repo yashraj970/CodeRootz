@@ -56,6 +56,7 @@ const Login = () => {
           if (response?.data?.token) {
             notifySuccess("Login successful");
             localStorage.setItem("token", response?.data?.token);
+            localStorage.setItem("role", JSON.stringify(response?.data?.role));
             setLoading(false);
             navigate("/");
           } else {
