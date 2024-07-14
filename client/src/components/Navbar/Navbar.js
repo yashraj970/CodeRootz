@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   List,
@@ -9,17 +10,17 @@ import {
   ListItemText,
   Stack,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { rootColors } from "../../utilities/Colors/Colors";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState(null);
 
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
-    console.log(storedRole, "storedRole");
     if (storedRole) {
       setRole(JSON.parse(storedRole));
     }
@@ -32,6 +33,15 @@ const Navbar = () => {
   const getNavLinks = () => {
     if (!role) return [];
     return navLinks.filter((link) => role.menus.includes(link.title));
+  };
+
+  const handleLogin = () => {
+    console.log(localStorage.getItem("token"));
+    if (localStorage.getItem("token")) {
+      localStorage.clear();
+    } else {
+      navigate("/login");
+    }
   };
 
   const DrawerList = (
@@ -63,24 +73,6 @@ const Navbar = () => {
         ))}
       </List>
       <Divider sx={{ bgcolor: "#FFFFFF" }} />
-      <List>
-        {["Login", "Signup"].map((text, index) => (
-          <Link
-            key={index}
-            to={text === "Signup" ? "/signup" : "/login"}
-            style={{
-              textDecoration: "none",
-              color: "#FFFFFF",
-            }}
-          >
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
     </Box>
   );
 
@@ -103,7 +95,18 @@ const Navbar = () => {
       <Stack onClick={toggleDrawer(true)} sx={{ cursor: "pointer" }}>
         <MenuIcon />
       </Stack>
-      <Stack>CodeRootz</Stack>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 4,
+          alignItems: "center",
+        }}
+      >
+        <Button onClick={handleLogin} variant="contained">
+          {localStorage.getItem("token") ? "Logout" : "Login"}
+        </Button>
+        {localStorage.getItem("token") && <Stack>{role?.name}</Stack>}
+      </Box>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
