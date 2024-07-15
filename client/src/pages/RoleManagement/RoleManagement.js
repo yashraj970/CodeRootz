@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { Roles } from "../../config/constants";
 import styles from "./RoleManagement.module.css";
+import { notifySuccess } from "../../utilities/toast";
 
 const RoleManagement = () => {
   const [roles, setRoles] = useState([]);
@@ -41,6 +42,7 @@ const RoleManagement = () => {
         name: roleName,
         menus: roleMenus,
       });
+      notifySuccess("Role Created");
       setRoles([...roles, response.data]);
       setRoleName("");
       setRoleMenus([]);
@@ -58,6 +60,7 @@ const RoleManagement = () => {
       const updatedRoles = roles.map((role) =>
         role._id === selectedRole._id ? response.data : role
       );
+      notifySuccess("Role updated");
       setRoles(updatedRoles);
       setSelectedRole(null);
       setRoleName("");
@@ -71,6 +74,7 @@ const RoleManagement = () => {
     try {
       await axios.delete(`${Roles}/${roleId}`);
       setRoles(roles.filter((role) => role._id !== roleId));
+      notifySuccess("Role Deleted");
     } catch (err) {
       console.error(err);
     }

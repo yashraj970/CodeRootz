@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Roles } from "../../config/constants";
 import styles from "./UserManagement.module.css";
+import { notifySuccess } from "../../utilities/toast";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -40,6 +41,7 @@ const UserManagement = () => {
       const updatedUsers = users.map((user) =>
         user._id === selectedUser._id ? response.data : user
       );
+      notifySuccess("Role changed");
       setUsers(updatedUsers);
       setSelectedUser(null);
       setSelectedRole("");
