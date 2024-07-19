@@ -5,7 +5,7 @@ const {
   createRole,
   updateRole,
   deleteRole,
-} = require("../controllers/roleController");
+} = require("../controllers/RoleController");
 
 router.get("/", getRoles);
 router.post("/", createRole);
